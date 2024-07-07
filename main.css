@@ -132,3 +132,26 @@ main {
 .search-container button {
 	width: 20%;
 }
+
+.see-products, .make-reservation {
+	font-size: larger;
+	width: fit-content;
+	padding: 2rem;
+	height: 100%;
+}
+
+.main-title {
+	font-size: 4rem;
+	text-align: center;
+}
+
+.home-page {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.home-page button {
+	margin: 2rem;
+}

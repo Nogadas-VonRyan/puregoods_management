@@ -19,6 +19,7 @@ require '../config.php';
     <nav>
         <div class="title">Puregoods Management System</div>
         <div>
+            <a href="#=../">Home</a>
             <a href="../product">Products</a>
             <a href="../customer">Reserve</a>
             <a href="../admin">Admin</a>
