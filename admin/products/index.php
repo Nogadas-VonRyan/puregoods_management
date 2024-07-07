@@ -32,7 +32,7 @@ if(!$_SESSION['user']) {
         <form>
             <div>
                 <label for="product_name">Product Name: </label>
-                <input type="text" name="product_name">
+                <input type="text" id="product_name" name="product_name">
             </div>
             <div>
                 <label for="product_price">Product Price: </label>
@@ -44,19 +44,23 @@ if(!$_SESSION['user']) {
             </div>
             <div>
                 <label for="product_price">Product Price: </label>
-                <input type="number" name="product_price">
+                <input type="number" id="product_price" name="product_price">
             </div>
-            <button type="button" onclick="insert()">Submit</button>
+            <button type="button" id="insert_button" onclick="insert()">Submit</button>
         </form>
 
-        <hr>
+        <hr class="pushdown">
 
         <h1>Manage Products</h1>
-        <button>Print Products</button>
+        <button class="pushdown">Print Products</button>
 
-        <div>
-            <label>Search</label>
-            <input type="text">
+        <div class="search-container pushdown">
+            <select id="filter_category">
+                <option value="chicken">Chicken</option>
+                <option value="beef">Beef</option>
+                <option value="pork">Pork</option>
+            </select>
+            <button onclick="filterCategory()">Filter</button>
         </div>
 
         <table>

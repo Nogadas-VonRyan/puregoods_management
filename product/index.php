@@ -26,12 +26,11 @@ require '../config.php';
         <h1>Product</h1>
         <div class="search-container pushdown">
             <select id="product_category" name="product_category">
-                <option value="none">Select Category</option>
                 <option value="chicken">Chicken</option>
                 <option value="beef">Beef</option>
                 <option value="pork">Pork</option>
             </select>
-            <button>Filter</button>
+            <button onclick="filterCategory()">Filter</button>
         </div>
 
         <table>

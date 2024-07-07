@@ -97,3 +97,20 @@ function displayIfEmpty(data) {
     table.innerHTML = '<tr><td colspan=6>Table is Empty</td></tr>';
     return true;
 }
+
+function filterCategory() {
+    const table = document.querySelector("#table_body");
+    const filter = document.querySelector('#product_category');
+	table.innerHTML = "";
+
+	for (const item of productData) {
+        if(item.product_category != filter.value) continue;
+
+		const row = document.createElement("tr");
+		row.innerHTML = `
+            <td>${item.product_name}</td>
+            <td>${item.product_category}</td>
+            <td>${item.product_price}</td>`;
+		table.append(row);
+	}
+}

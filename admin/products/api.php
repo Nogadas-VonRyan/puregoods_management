@@ -17,6 +17,17 @@ else if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->execute_query('insert into products(product_name, product_category,
          product_price) values(?,?,?)', $params);    
 }
+else if($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+    parse_str(file_get_contents('php://input'), $_PATCH);
+    $id = $_PATCH['product_id'];
+    $name = $_PATCH['product_name'];
+    $category = $_PATCH['product_category'];
+    $price = $_PATCH['product_price'];
+
+    $params = [$name,$category,$price,$id];
+    $conn->execute_query('update products set product_name=?, product_category=?,
+        product_price=? where product_id=?',$params);
+}
 else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents('php://input'), $_DELETE);
     $id = $_DELETE['product_id'];
@@ -24,7 +35,10 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     try{
         $conn->execute_query('delete from products where product_id=?',$params);
     } catch(Exception $e) {
-        echo '{error : active}';
+        echo '{"error" : "active"}';
+        return;
     }
+
+    echo '{"success" : "success"}';
 }
 ?>
