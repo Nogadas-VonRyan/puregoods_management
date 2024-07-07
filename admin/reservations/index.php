@@ -30,10 +30,6 @@ if (!$_SESSION['user']) {
 
     <main>
         <h1>Reservations</h1>
-        <div class="half-container pushdown">
-            <button>Delete All Paid</button>
-            <button>Delete All Paid and Claimed</button>
-        </div>
         <table>
             <thead>
                 <tr>
