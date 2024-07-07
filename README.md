@@ -1,1 +1,1 @@
-# puregoods_management
+# Puregoods Management System
