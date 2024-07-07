@@ -52,10 +52,11 @@ if(!$_SESSION['user']) {
         <hr class="pushdown">
 
         <h1>Manage Products</h1>
-        <button class="pushdown">Print Products</button>
+        <button class="pushdown" onclick="window.print()">Print Products</button>
 
         <div class="search-container pushdown">
             <select id="filter_category">
+                <option value="all">All Categories</option>
                 <option value="chicken">Chicken</option>
                 <option value="beef">Beef</option>
                 <option value="pork">Pork</option>

@@ -151,7 +151,7 @@ function filterCategory() {
     console.log(filter.value)
 
 	for (const item of productData) {
-        if(item.product_category != filter.value) continue;
+        if(filter.value != 'all' && item.product_category != filter.value) continue;
 
 		const row = document.createElement("tr");
 		row.innerHTML = `
