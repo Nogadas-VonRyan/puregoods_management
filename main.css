@@ -5,6 +5,29 @@ body {
 	color: #1c1822;
 }
 
+.anchor-list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.anchor-list a {
+	padding: 2rem;
+	font-size: large;
+	background-color: lightgray;
+	color: #1c1822;
+	text-decoration: none;
+	border: 1px solid darkgray;
+	border-radius: 10px;
+}
+
+.full {
+	width: 100%;
+	text-align: center;
+}
+
 .title {
     font-size: 1.3rem;
     font-weight: 600;

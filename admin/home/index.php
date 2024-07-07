@@ -28,9 +28,13 @@ if(!$_SESSION['user']) {
     </nav>
 
     <main>
-        <a href="../products">Product Manager</a>
-        <a href="../reservations">Reservation Manager</a>
-        <button>Logout</button>
+        <div class="anchor-list">
+            <h1 class="full">Welcome Admin!</h1>
+            <a href="../products">Product Manager</a>
+            <a href="../reservations">Reservation Manager</a>
+            <a href="../logout.php">Logout</a>
+        </div>
+        
     </main>
     <script src="script.js"></script>
 </body>
