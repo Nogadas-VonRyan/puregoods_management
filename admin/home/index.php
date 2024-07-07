@@ -33,6 +33,7 @@ if(!$_SESSION['user']) {
             <h1 class="full">Welcome Admin!</h1>
             <a href="../products">Product Manager</a>
             <a href="../reservations">Reservation Manager</a>
+            <a href="../customers">Pending Customers</a>
             <a href="../logout.php">Logout</a>
         </div>
         
