@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2024 at 07:45 PM
+-- Generation Time: Jul 07, 2024 at 12:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,54 +24,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Table structure for table `customers`
 --
 
-CREATE TABLE `customer` (
+CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `block` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
-  `price` int(11) NOT NULL
+  `product_price` int(11) NOT NULL,
+  `product_category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation`
+-- Table structure for table `reservations`
 --
 
-CREATE TABLE `reservation` (
+CREATE TABLE `reservations` (
   `reservation_id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `total_price` int(11) DEFAULT NULL,
   `is_claimed` tinyint(1) DEFAULT NULL,
   `is_paid` tinyint(1) DEFAULT NULL,
-  `date_reserved` date DEFAULT NULL,
+  `date_reserved` date DEFAULT current_timestamp(),
   `date_payment` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reserved_product`
+-- Table structure for table `reserved_products`
 --
 
-CREATE TABLE `reserved_product` (
+CREATE TABLE `reserved_products` (
   `reserved_product_id` int(11) NOT NULL,
   `reservation_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL
+  `product_count` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -79,28 +84,28 @@ CREATE TABLE `reserved_product` (
 --
 
 --
--- Indexes for table `customer`
+-- Indexes for table `customers`
 --
-ALTER TABLE `customer`
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`);
 
 --
--- Indexes for table `product`
+-- Indexes for table `products`
 --
-ALTER TABLE `product`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `reservation`
+-- Indexes for table `reservations`
 --
-ALTER TABLE `reservation`
+ALTER TABLE `reservations`
   ADD PRIMARY KEY (`reservation_id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- Indexes for table `reserved_product`
+-- Indexes for table `reserved_products`
 --
-ALTER TABLE `reserved_product`
+ALTER TABLE `reserved_products`
   ADD PRIMARY KEY (`reserved_product_id`),
   ADD KEY `reservation_id` (`reservation_id`),
   ADD KEY `product_id` (`product_id`);
@@ -110,45 +115,45 @@ ALTER TABLE `reserved_product`
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT for table `customers`
 --
-ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `customers`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `reservation`
+-- AUTO_INCREMENT for table `reservations`
 --
-ALTER TABLE `reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reservations`
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `reserved_product`
+-- AUTO_INCREMENT for table `reserved_products`
 --
-ALTER TABLE `reserved_product`
-  MODIFY `reserved_product_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reserved_products`
+  MODIFY `reserved_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `reservation`
+-- Constraints for table `reservations`
 --
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`);
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`);
 
 --
--- Constraints for table `reserved_product`
+-- Constraints for table `reserved_products`
 --
-ALTER TABLE `reserved_product`
-  ADD CONSTRAINT `reserved_product_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`reservation_id`),
-  ADD CONSTRAINT `reserved_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+ALTER TABLE `reserved_products`
+  ADD CONSTRAINT `reserved_products_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`),
+  ADD CONSTRAINT `reserved_products_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
