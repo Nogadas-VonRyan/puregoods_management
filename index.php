@@ -21,7 +21,7 @@
 
     <main class="home-page">
         <h1 class="main-title">Puregoods Management System</h1>
-        <div><img src="meat.png" alt="meat"></div>
+        <div><img src="./assets/meat.png" alt="meat"></div>
         <div>
             <button class="see-products">See our products</button>
             <button class="make-reservation">Make a reservation</button>
