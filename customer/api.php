@@ -32,8 +32,7 @@ else if($_SERVER['REQUEST_METHOD'] == 'POST') {
             first_name,middle_name,last_name,city,street,block) 
             values(?,?,?,?,?,?)', $params);
         
-        $response = $conn->query('select max(customer_id) from customers');
-        $customer_id = $response->fetch_assoc()['customer_id'];
+        $customer_id = mysqli_insert_id($conn);
     }
 
     $params = [$customer_id,$total,false,false,$date];
@@ -50,7 +49,6 @@ else if($_SERVER['REQUEST_METHOD'] == 'POST') {
             select max(reservation_id),?,?
             from reservations', $params);
     }
-    // var_dump($data);
 }
 else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents('php://input'), $_DELETE);

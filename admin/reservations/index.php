@@ -1,4 +1,4 @@
-<?php
+<th?php
 session_start();
 
 if (!$_SESSION['user']) {
@@ -28,8 +28,8 @@ if (!$_SESSION['user']) {
     </nav>
 
     <main>
-        <h1>Reserve Products</h1>
-        <div>
+        <h1>Reservations</h1>
+        <div class="half-container pushdown">
             <button>Delete All Paid</button>
             <button>Delete All Paid and Claimed</button>
         </div>
@@ -41,6 +41,7 @@ if (!$_SESSION['user']) {
                     <th>Total Price</th>
                     <th>Claimed</th>
                     <th>Paid</th>
+                    <th>View</th>
                     <th>Delete</th>
                 </tr>
             </thead>

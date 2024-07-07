@@ -12,6 +12,7 @@ if(!$_SESSION['user']) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../components/modal.css">
     <link rel="stylesheet" href="../../main.css">
     <title>Puregoods Management System</title>
 </head>
@@ -71,6 +72,12 @@ if(!$_SESSION['user']) {
             <tbody id="table_body"></tbody>
         </table>
     </main>
+    <div id="myModal" class="modal">
+        <div class="modal-content modal-danger">
+            <p id="modal_message">Error</p>
+        </div>
+    </div>
+    <script src="../../components/modal.js"></script>
     <script src="script.js"></script>
 </body>
 

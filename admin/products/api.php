@@ -21,6 +21,10 @@ else if($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents('php://input'), $_DELETE);
     $id = $_DELETE['product_id'];
     $params = [$id];
-    $conn->execute_query('delete from products where product_id=?',$params);
+    try{
+        $conn->execute_query('delete from products where product_id=?',$params);
+    } catch(Exception $e) {
+        echo '{error : active}';
+    }
 }
 ?>

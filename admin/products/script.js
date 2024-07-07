@@ -6,6 +6,9 @@ async function get() {
     const response = await fetch(endpoint);
     const data = await response.json();
     productData = data;
+
+    if(displayIfEmpty(productData)) return;
+
     displayTable();
 }
 get();
@@ -16,7 +19,6 @@ function displayTable() {
 
     for(const item of productData) {
         const row = document.createElement('tr');
-        console.log(productData)
         row.innerHTML = `
             <td>${item.product_name}</td>
             <td>${item.product_category}</td>
@@ -36,7 +38,6 @@ async function insert() {
     };
     const response = await fetch(endpoint,options);
     const data = response.text();
-    console.log(data);
     get();
 }
 
@@ -51,7 +52,6 @@ async function update() {
 
     const response = await fetch(endpoint,options);
     const data = await response.text();
-    console.log(data)
     displayTable();
 }
 
@@ -65,9 +65,12 @@ async function remove(productId) {
     }
 
     const response = await fetch(endpoint,options);
-    const data = await response.text();
-    console.log(data,productId)
+    const data = await response.json();
     get();
+
+    if(data == 'active')
+        displayModal(`Product is still active on other reservations.
+        Please delete all instances to delete this.`);
 }
 
 function createButton(productId) {
@@ -89,4 +92,12 @@ function createButton(productId) {
     removeCell.append(removeButton);
 
     return {editCell, removeCell};
+}
+
+function displayIfEmpty(data) {
+    if (data.length != 0) return false;
+
+    const table = document.querySelector('#table_body');
+    table.innerHTML = '<tr><td colspan=6>Table is Empty</td></tr>';
+    return true;
 }

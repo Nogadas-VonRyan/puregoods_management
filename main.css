@@ -96,3 +96,16 @@ main {
 .half-container div {
 	flex: 1;
 }
+
+.pushdown {
+	margin-bottom: 1rem;
+}
+
+.search-container {
+	display: flex;
+	gap: 10px;
+}
+
+.search-container button {
+	width: 20%;
+}

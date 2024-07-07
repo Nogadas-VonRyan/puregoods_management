@@ -6,6 +6,9 @@ async function get() {
     const data = await response.json();
 
     reservationData = data;
+
+    if(displayIfEmpty(reservationData)) return;
+
     displayTable();
 }
 get();
@@ -49,7 +52,7 @@ function displayTable() {
 
     for(const item of reservationData) {
         const row = document.createElement('tr');
-        const {claimCell, paidCell, removeCell} = createButton(
+        const {claimCell, paidCell, viewCell, removeCell} = createButton(
             item.reservation_id,
             item.is_claimed,
             item.is_paid);
@@ -61,6 +64,7 @@ function displayTable() {
 
         row.append(claimCell);
         row.append(paidCell);
+        row.append(viewCell);
         row.append(removeCell);
         table.append(row);
     }
@@ -69,10 +73,12 @@ function displayTable() {
 function createButton(reservationId, isClaimed, isPaid) {
     let claim = document.createElement('button');
     let paid = document.createElement('button');
+    let view = document.createElement('button');
     let removeButton = document.createElement('button');
 
     claim.textContent = (isClaimed)? 'Claimed' : 'Not Claimed';
     paid.textContent = (isPaid)? 'Paid' : 'Not Paid';
+    view.textContent = 'View';
     removeButton.textContent = 'Delete';
 
     let claimValue = isClaimed;
@@ -88,15 +94,39 @@ function createButton(reservationId, isClaimed, isPaid) {
         paid.textContent = (paidValue)? 'Paid' : 'Not Paid';
         update(reservationId,'is_paid',paidValue);
     });
+    view.addEventListener('click', async () => {
+        const formData = new FormData();
+        formData.append('reservation_id',reservationId);
+        
+        const options = {
+            method: 'POST',
+            body: formData
+        };
+
+        const response = await fetch(endpoint, options);
+        const data = await response.json();
+
+        displayModalTable(data);
+    })
     removeButton.addEventListener('click', remove.bind(null,reservationId));
 
     claimCell = document.createElement('td');
     paidCell = document.createElement('td');
+    viewCell = document.createElement('td');
     removeCell = document.createElement('td');
     
     claimCell.append(claim);
     paidCell.append(paid)
+    viewCell.append(view);
     removeCell.append(removeButton);
 
-    return {claimCell, paidCell, removeCell};
+    return {claimCell, paidCell, viewCell, removeCell};
+}
+
+function displayIfEmpty(data) {
+    if (data.length != 0) return false;
+
+    const table = document.querySelector('#table_body');
+    table.innerHTML = '<tr><td colspan=7>Table is Empty</td></tr>';
+    return true;
 }

@@ -6,6 +6,9 @@ async function get() {
     const response = await fetch(endpoint);
     const data = await response.json();
     productData = data;
+
+    if(displayIfEmpty(productData)) return;
+
     displayTable();
 }
 get();
@@ -85,4 +88,12 @@ function createButton(productId) {
     removeCell.append(removeButton)
 
     return {editCell, removeCell};
+}
+
+function displayIfEmpty(data) {
+    if (data.length != 0) return false;
+
+    const table = document.querySelector('#table_body');
+    table.innerHTML = '<tr><td colspan=6>Table is Empty</td></tr>';
+    return true;
 }

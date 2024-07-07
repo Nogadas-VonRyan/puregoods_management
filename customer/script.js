@@ -7,6 +7,9 @@ async function get() {
     const response = await fetch(endpoint);
     const data = await response.json();
     productData = data;
+
+    if(displayIfEmpty(productData)) return;
+
     displayTable();
 }
 get();
@@ -65,6 +68,7 @@ async function insert() {
     const response = await fetch(endpoint,options);
     const data = await response.text();
     console.log(data)
+    displayModal('Successfully Reserved!','modal-success')
 }
 
 async function update() {
@@ -157,5 +161,18 @@ function validate(data) {
         }
     }
 
+    if(getTotalPrice() <= 0) {
+        displayModal(`Total price bought is 0. Please buy something.`);
+        return false;
+    }
+
+    return true;
+}
+
+function displayIfEmpty(data) {
+    if (data.length != 0) return false;
+
+    const table = document.querySelector('#table_body');
+    table.innerHTML = '<tr><td colspan=5>Table is Empty</td></tr>';
     return true;
 }
