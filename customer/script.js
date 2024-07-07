@@ -36,7 +36,7 @@ async function insert() {
         return document.querySelector(param).value;
     }
 
-    let reservationData = {
+    let customerData = {
         'first_name': getInput('#first_name'),
         'middle_name': getInput('#middle_name'),
         'last_name': getInput('#last_name'),
@@ -50,7 +50,7 @@ async function insert() {
         }
     };
     
-    if(!validate(reservationData)) {
+    if(!validate(customerData)) {
         return;
     }
 
@@ -59,7 +59,7 @@ async function insert() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(reservationData)
+        body: JSON.stringify(customerData)
     };
 
     const response = await fetch(endpoint,options);
@@ -113,6 +113,8 @@ function createDynamicInputPrice(productId,productName,productPrice) {
     price.textContent = '₱0';
 
     input.addEventListener('input', ()=>{
+        if(parseInt(input.value) < 0) input.value = 0;
+
         const result = parseInt(input.value) * productPrice;
 
         if(isNaN(result)) {

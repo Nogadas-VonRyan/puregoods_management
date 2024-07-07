@@ -29,7 +29,7 @@ if(!$_SESSION['user']) {
 
     <main>
         <a href="../products">Product Manager</a>
-        <a href="../reservation">Reservation Manager</a>
+        <a href="../reservations">Reservation Manager</a>
         <button>Logout</button>
     </main>
     <script src="script.js"></script>
