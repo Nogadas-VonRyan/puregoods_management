@@ -18,6 +18,8 @@ function displayTable() {
     table.innerHTML = '';
 
     for(const item of productData) {
+        item.product_category = item.product_category.charAt(0).toUpperCase() 
+            + item.product_category.slice(1);
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${item.product_name}</td>

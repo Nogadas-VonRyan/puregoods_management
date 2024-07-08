@@ -24,6 +24,8 @@ function displayTable() {
 	table.innerHTML = "";
 
 	for (const item of productData) {
+		item.product_category = item.product_category.charAt(0).toUpperCase() 
+            + item.product_category.slice(1);
 		const row = document.createElement("tr");
 		row.innerHTML = `
             <td>${item.product_name}</td>
@@ -48,6 +50,7 @@ async function insert() {
 	const response = await fetch(endpoint, options);
 	const data = response.text();
 	get();
+	displayModal('Added product successfully!','modal-success');
 }
 
 async function update() {
