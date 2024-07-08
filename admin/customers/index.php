@@ -34,6 +34,7 @@ if(!$_SESSION['user']) {
             <thead>
                 <tr>
                     <th>Customer Name</th>
+                    <th>Address</th>
                     <th>Pending Amount</th>
                     <th>Delete</th>
                 </tr>

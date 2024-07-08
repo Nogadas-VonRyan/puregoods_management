@@ -110,7 +110,7 @@ function filterCategory() {
 		row.innerHTML = `
             <td>${item.product_name}</td>
             <td>${item.product_category}</td>
-            <td>${item.product_price}</td>`;
+            <td>₱${item.product_price}</td>`;
 		table.append(row);
 	}
 }

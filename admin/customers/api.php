@@ -4,7 +4,7 @@ require '../../config.php';
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
     $response = $conn->query('
         select customers.customer_id,first_name,middle_name,last_name,
-        sum(total_price) from customers 
+        city, street, block, sum(total_price) from customers 
         join reservations 
         on customers.customer_id = reservations.customer_id
         where is_paid = 0

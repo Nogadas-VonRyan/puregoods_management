@@ -40,6 +40,7 @@ function displayTable() {
         
         row.innerHTML = `
             <td>${item.first_name} ${item.middle_name} ${item.last_name}</td>
+            <td>${item.city} ${item.street} ${item.block}</td>
             <td>₱${item['sum(total_price)']}</td>`;
         row.append(removeCell);
         table.append(row);   

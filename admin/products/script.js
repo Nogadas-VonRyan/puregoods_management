@@ -81,7 +81,7 @@ async function remove(productId) {
     const data = await response.json();
 	get();
 
-	if (data == "active")
+	if (data.error == "active")
 		displayModal(`Product is still active on other reservations.
         Please delete all instances to delete this.`);
 }
@@ -148,8 +148,6 @@ function filterCategory() {
     const filter = document.querySelector('#filter_category');
 	table.innerHTML = "";
 
-    console.log(filter.value)
-
 	for (const item of productData) {
         if(filter.value != 'all' && item.product_category != filter.value) continue;
 
@@ -157,7 +155,7 @@ function filterCategory() {
 		row.innerHTML = `
             <td>${item.product_name}</td>
             <td>${item.product_category}</td>
-            <td>${item.product_price}</td>`;
+            <td>₱${item.product_price}</td>`;
         const { editCell, removeCell } = createButton(
             item.product_id,
             item
